@@ -12,24 +12,23 @@ mr hugo homosexual behöver hjälpa mig med detta skit riktigt helvete med all a
 ****************************
 """
 def main() -> None:
-    # youtube_video_link = ""
-    # download_video(youtube_video_link)
+    youtube_video_link = "https://www.youtube.com/watch?v=cXzlxlDBYy0"
+    download_video(youtube_video_link)
     respond_list = []
-    transcript = generate_transcript("temp/video.webm")
+    transcript = generate_transcript("temp/video.mkv")
     for blocks in transcript:
         prompt = (
-                "Extract the most important and insightful quotes from the following transcript. "
-                "Each quote should be self-contained and make sense without additional context. "
-                "The quotes can come from different parts of the transcript and may span across multiple segments if needed. "
-                "Ensure that the quotes are meaningful and can stand alone as impactful statements. "
-                "Here is the transcript: " + str(blocks)
+                "Crete motivational quotes from this transcription, give me them back in a json format with time staps of start and end of qouts: " + str(blocks)
                 )
         respond = generate_script(prompt)
         respond_list.append(respond)
-
+    print(respond_list)
+    """ 
     prompt = "Convert the following extracted quotes into a Python list, with no additional information or formatting. Just return the list:\n\n" + str(respond_list)
     respond = generate_script(prompt)
     print(respond)
+    """
+
 
 
 if __name__ == "__main__":

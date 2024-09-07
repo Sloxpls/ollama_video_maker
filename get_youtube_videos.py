@@ -1,6 +1,5 @@
-import yt_dlp  # pip install yt-dlp
+import yt_dlp as ydl
 import os
-
 
 def download_video(video_url):
     if not os.path.exists('temp'):
@@ -9,15 +8,10 @@ def download_video(video_url):
     # Set options for yt-dlp
     ydl_opts = {
         'format': 'bestvideo+bestaudio/best',  # Download the best video and audio separately, then merge
-        'outtmpl': 'temp/video',  # Output file template
+        'outtmpl': 'temp/video.%(ext)s',  # Output file template with extension
         'noplaylist': True,  # Only download a single video
     }
 
-    try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([video_url])
-        return
-
-    except Exception as e:
-        print(f"Could not download Youtube video: {e}")
-        return
+    # Instantiate and execute the download process
+    with ydl.YoutubeDL(ydl_opts) as ydl_instance:
+        ydl_instance.download([video_url])
